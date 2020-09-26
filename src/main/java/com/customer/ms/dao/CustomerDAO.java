@@ -38,15 +38,6 @@ public class CustomerDAO {
 		return cus;
 	}
 
-	public Customer updateCustomer(Customer cus) {
-		cusMap.put(cus.getCusId(), cus);
-		return cus;
-	}
-
-	public void deleteCustomer(String cusId) {
-		cusMap.remove(cusId);
-	}
-
 	public List<Customer> getAllCustomers() {
 		Collection<Customer> c = cusMap.values();
 		List<Customer> list = new ArrayList<Customer>();
