@@ -6,10 +6,6 @@ public class Customer {
 	private String cusName;
 	private String address;
 
-	public Customer() {
-
-	}
-
 	public Customer(String cusId, String cusName, String address) {
 		this.cusId = cusId;
 		this.cusName = cusName;
