@@ -1,16 +1,15 @@
 package com.customer.ms.model;
 
-public class Customer {
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
+@Document(collection = "Customer")
+public class CustomerM {
+
+	@Id
 	private String cusId;
 	private String cusName;
 	private String address;
-
-	public Customer(String cusId, String cusName, String address) {
-		this.cusId = cusId;
-		this.cusName = cusName;
-		this.address = address;
-	}
 
 	public String getCusId() {
 		return cusId;
@@ -32,7 +31,7 @@ public class Customer {
 		return address;
 	}
 
-	public void setCity(String address) {
+	public void setAddress(String address) {
 		this.address = address;
 	}
 
