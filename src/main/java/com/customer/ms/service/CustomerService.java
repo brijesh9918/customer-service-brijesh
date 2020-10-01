@@ -12,7 +12,4 @@ public interface CustomerService {
 
 	CustomerM addCustomer(CustomerM customerm);
 
-	CustomerM updateCustomer(CustomerM customerm);
-
-	void deleteCustomer(String cusId);
 }

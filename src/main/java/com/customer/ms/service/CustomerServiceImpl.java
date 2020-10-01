@@ -34,13 +34,4 @@ public class CustomerServiceImpl implements CustomerService {
 		return customerRepository.save(customerM);
 	}
 
-	@Override
-	public CustomerM updateCustomer(CustomerM customerM) {
-		return customerRepository.save(customerM);
-	}
-
-	@Override
-	public void deleteCustomer(String cusId) {
-		customerRepository.deleteById(cusId);
-	}
 }
