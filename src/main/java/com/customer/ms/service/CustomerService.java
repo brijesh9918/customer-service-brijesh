@@ -2,14 +2,19 @@ package com.customer.ms.service;
 
 import java.util.List;
 
-import com.customer.ms.model.CustomerM;
+import com.customer.ms.model.Customer;
 
 public interface CustomerService {
 
-	List<CustomerM> findAll();
+	List<Customer> findAll();
 
-	CustomerM findById(String cusId);
+	Customer findById(String cusId);
 
-	CustomerM addCustomer(CustomerM customerm);
+	Customer addCustomer(Customer customer);
+	
+	Customer updateCustomer(Customer customer);
+	
+	String deleteCustomer(String cusId);
+
 
 }

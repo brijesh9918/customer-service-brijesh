@@ -1,37 +1,44 @@
 package com.customer.ms.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.customer.ms.model.CustomerM;
-import com.customer.ms.repository.CustomerRepository;
+import com.customer.ms.dao.CustomerDAO;
+import com.customer.ms.model.Customer;
 
 @Service
 public class CustomerServiceImpl implements CustomerService {
 
 	@Autowired
-	private CustomerRepository customerRepository;
+	private CustomerDAO customerDAO;
 
 	@Override
-	public List<CustomerM> findAll() {
-		return customerRepository.findAll();
+	public List<Customer> findAll() {
+		return customerDAO.getAllCustomers();
 	}
 
 	@Override
-	public CustomerM findById(String cusId) {
-		Optional<CustomerM> opt = customerRepository.findById(cusId);
-		if (opt.isPresent()) {
-			return opt.get();
-		}
-		return null;
+	public Customer findById(String cusId) {
+		Customer cust = customerDAO.getCustomer(cusId);
+		
+		return cust;
 	}
 
 	@Override
-	public CustomerM addCustomer(CustomerM customerM) {
-		return customerRepository.save(customerM);
+	public Customer addCustomer(Customer customer) {
+		return customerDAO.addCustomer(customer);
+	}
+
+	@Override
+	public Customer updateCustomer(Customer customer) {
+		return customerDAO.updateCustomer(customer);
+	}
+
+	@Override
+	public String deleteCustomer(String cusId) {
+		return customerDAO.deleteCustomer(cusId);
 	}
 
 }

@@ -12,15 +12,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.customer.ms.dao.CustomerDAO;
 import com.customer.ms.model.Customer;
-import com.customer.ms.model.CustomerM;
 import com.customer.ms.service.CustomerService;
 
 @RestController
 public class CustomerController {
 
-	@Autowired
-	private CustomerDAO customerDAO;
-	
+		
 	@Autowired
 	private CustomerService customerService;
 
@@ -33,43 +30,30 @@ public class CustomerController {
 	// URL - http://localhost:8081/customers
 	@RequestMapping(value = "/customers", method = RequestMethod.GET, produces = { MediaType.APPLICATION_JSON_VALUE })
 	public List<Customer> getCustomers() {
-		List<Customer> list = customerDAO.getAllCustomers();
+		List<Customer> list = customerService.findAll();
 		return list;
 	}
 
 	// URL - http://localhost:8081/customer/{cusId}
 	@RequestMapping(value = "/customer/{cusId}", method = RequestMethod.GET, produces = { MediaType.APPLICATION_JSON_VALUE })
 	public Customer getCustomer(@PathVariable("cusId") String cusId) {
-		return customerDAO.getCustomer(cusId);
+		return customerService.findById(cusId);
 	}
 
 	// URL - POST http://localhost:8081/customer}
 	@RequestMapping(value = "/customer", method = RequestMethod.POST, produces = { MediaType.APPLICATION_JSON_VALUE })
 	public Customer addCustomer(@RequestBody Customer customer) {
-		return customerDAO.addCustomer(customer);
-	}
-		
-	// URL - http://localhost:8081/mongoCustomers
-	@RequestMapping(value = "/mongoCustomers", //
-			method = RequestMethod.GET, //
-			produces = { MediaType.APPLICATION_JSON_VALUE })
-	public List<CustomerM> getMongoCustomers() {
-		List<CustomerM> list = customerService.findAll();
-		return list;
-	}
-
-	// URL - http://localhost:8081/mongoCustomer/{cusId}
-	@RequestMapping(value = "/mongoCustomer/{cusId}", //
-			method = RequestMethod.GET, //
-			produces = { MediaType.APPLICATION_JSON_VALUE })
-	public CustomerM getMongoCustomer(@PathVariable("cusId") String cusId) {
-		return customerService.findById(cusId);
+		return customerService.addCustomer(customer);
 	}
 	
-	// URL - POST http://localhost:8081/mongoCustomer}
-	@RequestMapping(value = "/mongoCustomer", method = RequestMethod.POST, produces = { MediaType.APPLICATION_JSON_VALUE })
-	public CustomerM addMongoCustomer(@RequestBody CustomerM customerM) {
-		return customerService.addCustomer(customerM);
+	@RequestMapping(value = "/updatecustomer", method = RequestMethod.POST, produces = { MediaType.APPLICATION_JSON_VALUE })
+	public Customer updateCustomer(@RequestBody Customer customer) {
+		return customerService.updateCustomer(customer);
+	}
+	
+	@RequestMapping(value = "/customer/delete/{cusId}", method = RequestMethod.GET, produces = { MediaType.APPLICATION_JSON_VALUE })
+	public String getDeleteCustomer(@PathVariable("cusId") String cusId) {
+		return customerService.deleteCustomer(cusId);
 	}
 
 

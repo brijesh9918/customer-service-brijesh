@@ -44,5 +44,15 @@ public class CustomerDAO {
 		list.addAll(c);
 		return list;
 	}
+	
+	public Customer updateCustomer(Customer cus) {
+		cusMap.put(cus.getCusId(), cus);
+		return cus;
+	}
+	
+	public String deleteCustomer(String cusId) {
+		cusMap.remove(cusId);
+		return "Customer has been deleted.";
+	}
 
 }
