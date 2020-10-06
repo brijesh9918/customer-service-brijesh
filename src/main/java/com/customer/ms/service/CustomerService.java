@@ -3,6 +3,7 @@ package com.customer.ms.service;
 import java.util.List;
 
 import com.customer.ms.model.Customer;
+import com.customer.ms.model.CustomerM;
 
 public interface CustomerService {
 
@@ -15,6 +16,16 @@ public interface CustomerService {
 	Customer updateCustomer(Customer customer);
 	
 	String deleteCustomer(String cusId);
+	
+	CustomerM saveCustomer(CustomerM customerM);
+	
+	List<CustomerM> findAllFromDatabase();
+	
+	CustomerM findByIdFromDatabase(String cusId);
+	
+	String deleteDbCustomer(String cusId);
+	
+	CustomerM updateDbCustomer(CustomerM customerM);
 
 
 }

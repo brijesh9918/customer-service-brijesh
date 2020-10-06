@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.customer.ms.dao.CustomerDAO;
 import com.customer.ms.model.Customer;
+import com.customer.ms.model.CustomerM;
 import com.customer.ms.service.CustomerService;
 
 @RestController
@@ -51,10 +52,45 @@ public class CustomerController {
 		return customerService.updateCustomer(customer);
 	}
 	
-	@RequestMapping(value = "/customer/delete/{cusId}", method = RequestMethod.GET, produces = { MediaType.APPLICATION_JSON_VALUE })
+	@RequestMapping(value = "/customer/delete/{cusId}", method = RequestMethod.DELETE, produces = { MediaType.APPLICATION_JSON_VALUE })
 	public String getDeleteCustomer(@PathVariable("cusId") String cusId) {
 		return customerService.deleteCustomer(cusId);
 	}
+	
+	
+	// URL - http://localhost:8081/mongoCustomers
+		@RequestMapping(value = "/mongoCustomers", //
+				method = RequestMethod.GET, //
+				produces = { MediaType.APPLICATION_JSON_VALUE })
+		public List<CustomerM> getMongoCustomers() {
+			List<CustomerM> list = customerService.findAllFromDatabase();
+			return list;
+		}
+
+		// URL - http://localhost:8081/mongoCustomer/{cusId}
+		@RequestMapping(value = "/mongoCustomer/{cusId}", //
+				method = RequestMethod.GET, //
+				produces = { MediaType.APPLICATION_JSON_VALUE })
+		public CustomerM getMongoCustomer(@PathVariable("cusId") String cusId) {
+			return customerService.findByIdFromDatabase(cusId);
+		}
+		
+		// URL - POST http://localhost:8081/mongoCustomer}
+		@RequestMapping(value = "/mongoCustomer", method = RequestMethod.POST, produces = { MediaType.APPLICATION_JSON_VALUE })
+		public CustomerM addMongoCustomer(@RequestBody CustomerM customerM) {
+			return customerService.saveCustomer(customerM);
+		}
+		
+		@RequestMapping(value = "/mongoCustomer/delete/{cusId}", method = RequestMethod.DELETE, produces = { MediaType.APPLICATION_JSON_VALUE })
+		public String getDeleteDbCustomer(@PathVariable("cusId") String cusId) {
+			return customerService.deleteDbCustomer(cusId);
+		}
+		
+		@RequestMapping(value = "/mongoCustomer/update", method = RequestMethod.POST, produces = { MediaType.APPLICATION_JSON_VALUE })
+		public CustomerM updateMongoCustomer(@RequestBody CustomerM customerM) {
+			return customerService.updateDbCustomer(customerM);
+		}
+		
 
 
 }
